@@ -2,8 +2,8 @@ pipeline {
     agent none
 
     environment {
-        APP_NAME = "project2"
-        IMAGE_NAME = "registry.gitlab.com/nkd3v/project2"
+        APP_NAME = "simple-api"
+        IMAGE_NAME = "registry.gitlab.com/sdpx-devbit/simple-api"
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
 
                 withCredentials(
                 [usernamePassword(
-                    credentialsId: '3b4805ee-358c-466d-8f1d-9e2ac58fa53f',
+                    credentialsId: 'nkd3v-cred',
                     passwordVariable: 'gitlabPassword',
                     usernameVariable: 'gitlabUser'
                 )]) {
@@ -43,12 +43,11 @@ pipeline {
             }
             steps {
                 withCredentials(
-                    [usernamePassword(
-                        credentialsId: '3b4805ee-358c-466d-8f1d-9e2ac58fa53f',
-                        passwordVariable: 'gitlabPassword',
-                        usernameVariable: 'gitlabUser'
-                    )]
-                ) {
+                [usernamePassword(
+                    credentialsId: 'nkd3v-cred',
+                    passwordVariable: 'gitlabPassword',
+                    usernameVariable: 'gitlabUser'
+                )]) {
                     sh "docker login -u ${env.gitlabUser} -p ${env.gitlabPassword} registry.gitlab.com"
                 }
                 
