@@ -17,6 +17,8 @@ pipeline {
                 sh "python3 -m unittest"
 
                 sh "docker build -t ${env.IMAGE_NAME}:${env.BUILD_NUMBER} app"
+                
+                sh "docker rm -f `docker ps -aq`"
                 sh "docker run -d --rm -p 5000:5000 ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
 
                 sh "rm -rf simple-api-robot; git clone https://gitlab.com/sdpx-devbit/simple-api-robot"
