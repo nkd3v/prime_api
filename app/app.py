@@ -1,4 +1,3 @@
-
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -9,7 +8,7 @@ def index():
 
 
 @app.route('/getcode', methods=['GET'])
-def getcode(name):
+def getcode():
     return "123456"
 
 
