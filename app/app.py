@@ -13,5 +13,10 @@ def getcode(name):
     return "123456"
 
 
+@app.route('/plus/<num1>/<num2>', methods=['GET'])
+def plus(num1, num2):
+    return str(eval(f'{num1} + {num2}'))
+
+
 if __name__ == '__main__':
     app.run()
