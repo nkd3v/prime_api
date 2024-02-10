@@ -21,7 +21,7 @@ pipeline {
                 sh "docker rm -f `docker ps -aq`"
                 sh "docker run -d --rm -p 5000:5000 ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
 
-                sh "rm -rf simple-api-robot; git clone https://gitlab.com/nkd3v/simple-api-robot"
+                sh "rm -rf simple-api-robot; git clone https://gitlab.com/sdpx-devbit/simple-api-robot"
                 sh "pip3 install robotframework robotframework-requests"
                 sh "python3 -m robot simple-api-robot/test-plus.robot"
 
