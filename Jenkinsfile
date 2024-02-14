@@ -9,9 +9,7 @@ pipeline {
     stages {
         
         stage('Build') {
-            agent {
-                label 'test'
-            }
+            agent { label 'test' }
             steps {
                 sh "pip3 install -r app/requirements.txt"
                 sh "python3 -m unittest"
@@ -39,9 +37,7 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent {
-                label 'preprod'
-            }
+            agent { label 'preprod' }
             steps {
                 withCredentials(
                 [usernamePassword(
@@ -51,16 +47,9 @@ pipeline {
                 )]) {
                     sh "docker login -u ${env.gitlabUser} -p ${env.gitlabPassword} registry.gitlab.com"
                 }
-                
-                script {
-                    try {
-                        echo "Updating service"
-                        sh "docker service update simple --with-registry-auth --image ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
-                    } catch (e) {
-                        echo "Creating service"
-                        sh "docker service create --with-registry-auth --name simple -p 80:5000 ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
-                    }
-                }
+
+                sh "docker rm -f simple-api"
+                sh "docker run -d -p 80:5000 --name simple-api ${env.IMAGE_NAME}:${env.BUILD_NUMBER}"
             }
         }
     }
