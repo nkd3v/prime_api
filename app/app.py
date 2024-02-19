@@ -9,7 +9,7 @@ def index():
 
 @app.route('/getcode', methods=['GET'])
 def getcode():
-    return "0001"
+    return "pi 12 digits"
 
 
 
