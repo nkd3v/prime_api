@@ -9,7 +9,7 @@ def index():
 
 @app.route('/getcode', methods=['GET'])
 def getcode():
-    return "64"
+    return "0001"
 
 
 
