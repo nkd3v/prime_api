@@ -2,16 +2,16 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
-    return "It works!"
+    return "Hi, hello"
+    # return "It works!"
 
 
 @app.route('/getcode', methods=['GET'])
 def getcode():
-    return "pi 12 digits"
-
-
+    return "AAA"
 
 @app.route('/plus/<num1>/<num2>', methods=['GET'])
 def plus(num1, num2):
