@@ -6,16 +6,16 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return "Hi, hello"
-    # return "It works!"
 
 
-@app.route('/getcode', methods=['GET'])
-def getcode():
-    return "AAA"
-
-@app.route('/plus/<num1>/<num2>', methods=['GET'])
-def plus(num1, num2):
-    return str(eval(f'{num1} + {num2}'))
+@app.route('/is_prime/<int:num>', methods=['GET'])
+def is_prime(num):
+    if num <= 1:
+        return "false"
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return "false"
+    return "true"
 
 
 if __name__ == '__main__':
